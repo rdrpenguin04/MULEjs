@@ -19,7 +19,7 @@ var doneLoading = true;
 function loadDataAndStartMusic() {
   //Load data here
   //If we are done, start music and set the current script to 0 (title)
-  if(done) {
+  if(doneLoading) {
     var audio = new Audio("mainTheme.wav");
     audio.play();
     script = 0;

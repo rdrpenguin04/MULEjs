@@ -22,6 +22,7 @@ function loadDataAndStartMusic() {
   if(doneLoading) {
     var audio = new Audio("mainTheme.wav");
     audio.play();
+    audio.loop = true;
     script = 0;
   }
 }

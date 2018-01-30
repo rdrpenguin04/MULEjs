@@ -11,11 +11,11 @@ function init() {
     || window.mozRequestAnimationFrame
     || window.webkitRequestAnimationFrame
     || window.msRequestAnimationFrame
-    || function(f){return setTimeout(f, 1000/60)} // simulate calling code 60 
+    || function(f){return setTimeout(f, 1000/60)}
   
   window.cancelAnimationFrame = window.cancelAnimationFrame
     || window.mozCancelAnimationFrame
-    || function(requestID){clearTimeout(requestID)} //fall back
+    || function(requestID){clearTimeout(requestID)}
   
   window.requestAnimationFrame(tick);
 }
@@ -24,14 +24,14 @@ function title() {
   
 }
 
-var audio;
+var music;
 
 var doneLoading = true;
 function loadDataAndStartMusic() {
-  //Load data here
-  //If we are done, start music and set the current script to 0 (title)
+  // Load data here
+  // If we are done, start music and set the current script to 0 (title)
   if(doneLoading) {
-    audio = new Audio("mainTheme.wav");
+    music = new Audio("mainTheme.wav"); // TODO: MOVE TO LOADING DATA
     audio.play();
     audio.loop = true;
     script = 0; //title
@@ -40,22 +40,17 @@ function loadDataAndStartMusic() {
 
 function stop() {
   audio.stop();
-  //Unload resources here.
+  // Unload resources here.
 }
 
+var scripts = [title, loadDataAndStartMusic];
+
 function tick() {
-  switch(script) {
-    case 0:
-      title();
-      break;
-    case 1:
-      loadDataAndStartMusic();
-      break;
-    default:
-      log("Invalid game state, restarting...");
-      stop();
-      init();
-      break;
+  if(script >= scripts.length) {
+    log("Error: invalid script! Resetting...");
+    stop();
+    init();
   }
+  scripts[script]();
   window.requestAnimationFrame(tick);
 }

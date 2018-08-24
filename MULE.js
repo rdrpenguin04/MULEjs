@@ -32,14 +32,14 @@ function loadDataAndStartMusic() {
   // If we are done, start music and set the current script to 0 (title)
   if(doneLoading) {
     music = new Audio("mainTheme.wav"); // TODO: MOVE TO LOADING DATA
-    audio.play();
-    audio.loop = true;
+    music.play();
+    music.loop = true;
     script = 0; //title
   }
 }
 
 function stop() {
-  audio.stop();
+  music.stop();
   // Unload resources here.
 }
 
